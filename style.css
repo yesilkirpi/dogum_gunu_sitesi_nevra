@@ -1,0 +1,252 @@
+/* --- TEMEL AYARLAR --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pixelify Sans', cursive, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: #fbdce6;
+    color: #a24f66;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    padding: 16px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- ANA SAHNE --- */
+#main-stage {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+#message {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    min-height: 2rem;
+    transition: all 0.3s ease;
+    white-space: pre-line;
+    padding: 0 8px;
+}
+
+#main-btn {
+    background-color: transparent;
+    color: #a24f66;
+    border: 2px solid #a24f66;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+    user-select: none;
+    touch-action: manipulation;
+    max-width: 90vw;
+}
+
+#main-btn:hover {
+    background-color: rgba(162, 79, 102, 0.1);
+    transform: scale(1.05);
+}
+
+/* --- PROGRESS BAR --- */
+#progress-container {
+    width: 300px;
+    max-width: 80vw;
+    margin: 0 auto;
+}
+
+#progress-label {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#progress-bar-bg {
+    width: 100%;
+    height: 20px;
+    background: rgba(162, 79, 102, 0.15);
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+#progress-bar-fill {
+    width: 0;
+    height: 100%;
+    background-color: #a24f66;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+#progress-text,
+#progress-status {
+    margin-top: 6px;
+    font-size: 0.9rem;
+}
+
+/* --- FLASH IMAGE --- */
+#flash-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    object-fit: cover;
+    z-index: 999;
+}
+
+/* --- BSOD --- */
+#bsod {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background-color: #0078d7;
+    color: #ffffff;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8vw;
+    font-family: 'Segoe UI', 'Pixelify Sans', monospace, sans-serif;
+    text-align: left;
+}
+
+#bsod h1 {
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: normal;
+    margin-bottom: 2rem;
+}
+
+#bsod p {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+#bsod .error-code {
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    color: #cfe8ff;
+    margin-top: 2rem;
+    letter-spacing: 0.5px;
+}
+
+/* --- FİNAL SAHNESİ --- */
+#final-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    padding-top: 4vh;
+    gap: 1.5rem;
+}
+
+#typewriter {
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+    min-height: 6rem;
+    order: 1;
+    padding: 0 8px;
+}
+
+#carousel-container {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+#carousel-img,
+#video-carousel-player {
+    width: 380px;
+    max-width: 65vw;
+    max-height: 55dvh;
+    height: auto;
+    border-radius: 12px;
+    border: 2px solid #a24f66;
+    object-fit: cover;
+    background-color: #000;
+}
+
+.nav-btn {
+    background: transparent;
+    border: 2px solid #a24f66;
+    color: #a24f66;
+    font-size: 1.4rem;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 8px;
+    touch-action: manipulation;
+    flex-shrink: 0;
+}
+
+.nav-btn:hover {
+    background-color: rgba(162, 79, 102, 0.1);
+}
+
+#final-note {
+    margin-top: 0.5rem;
+    font-size: clamp(0.85rem, 3vw, 1rem);
+    max-width: 90vw;
+    padding: 0 8px;
+}
+
+/* --- MOBİL EKRANLAR İÇİN İNCE AYAR --- */
+@media (max-width: 480px) {
+    #message {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+    }
+
+    #main-btn {
+        padding: 12px 22px;
+        font-size: 1.2rem;
+    }
+
+    .carousel {
+        gap: 0.4rem;
+    }
+
+    #carousel-img,
+    #video-carousel-player {
+        max-width: 60vw;
+    }
+
+    .nav-btn {
+        padding: 8px 10px;
+        font-size: 1.2rem;
+    }
+}

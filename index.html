@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DO NOT CLICK</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <main id="main-stage">
+        <h1 id="message"></h1>
+        <button id="main-btn">DO NOT CLICK</button>
+        <div id="progress-container" class="hidden">
+            <div id="progress-label">Trust Level</div>
+            <div id="progress-bar-bg">
+                <div id="progress-bar-fill"></div>
+            </div>
+            <div id="progress-text">0%</div>
+            <div id="progress-status" class="status-text">Loading birthday...</div>
+        </div>
+    </main>
+
+    <img id="flash-img" src="" alt="Flash" class="hidden">
+
+    <div id="bsod" class="hidden">
+        <h1>:(</h1>
+        <p>Your PC ran into a problem and needs to restart.</p>
+        <p class="error-code">Fatal Error: BIRTHDAY_OVERFLOW</p>
+    </div>
+
+    <section id="final-stage" class="hidden">
+        <div id="typewriter"></div>
+
+        <div id="carousel-container" class="hidden">
+            <div class="carousel">
+                <button id="prev-btn" class="nav-btn">&lt;</button>
+                <img id="carousel-img" src="" alt="Anı">
+                <video id="video-carousel-player" class="hidden" controls playsinline></video>
+                <button id="next-btn" class="nav-btn">&gt;</button>
+            </div>
+            <p id="final-note">
+                Geçirdiğimiz tüm saçma anılar için teşekkür ederim.<br>
+                Umarım bundan sonra daha da saçma anılar biriktiririz. 🎂<br>
+                Tabii beni satmazsan :P
+            </p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
