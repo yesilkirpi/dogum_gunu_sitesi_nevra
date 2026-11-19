@@ -59,8 +59,8 @@ const story = [
     { message: "Basma diyoruz alo >:(", btnText: "Neden basıyorsun?", style: { transform: "scale(1)" } },
     { message: "Hainnn", btnText: "Hmm?", style: { backgroundColor: "#a24f66", color: "#fbdce6", borderColor: "#a24f66" } },
     { message: "Seni test ediyorum.", btnText: "Tıkla bakalım", style: { backgroundColor: "transparent", color: "#a24f66", borderColor: "#a24f66" } },
-    { message: "Yakala da görelim nevroş", btnText: "Hadi!", action: "runaway", style: { position: "absolute" } },
-    { message: "Tamam tamam, pes.", btnText: "Normale dön.", action: "stop_runaway", style: { position: "static", transform: "translate(0,0)" } },
+    { message: "Yakala da görelim nevroş", btnText: "Hadi!", action: "runaway" },
+    { message: "Tamam tamam, yeter", btnText: "Normale dön.", action: "stop_runaway" },
     { message: "Bu arada...", btnText: "Ne oldu?", action: "flash_photo" },
     { message: "Hayır görmedin.", btnText: "Emin misin?", action: "flash_photo" },
     { message: "meow", btnText: "", action: "start_progress", style: { display: "none" } },
@@ -119,7 +119,6 @@ function triggerAction(actionName) {
             break;
         case "prepare_final":
             mainBtn.style.display = "inline-block";
-            mainBtn.style.position = "static";
             mainBtn.style.transform = "scale(1.2)";
             mainBtn.style.backgroundColor = "#fff";
             mainBtn.style.color = "#a24f66";
@@ -131,6 +130,8 @@ function triggerAction(actionName) {
 // --- Kaçan Buton ---
 function startRunaway() {
     isRunawayActive = true;
+    mainStage.style.minHeight = mainStage.offsetHeight + "px";
+    mainBtn.classList.add("runaway");
     moveButtonRandomly();
 
     runawayTimer = setInterval(() => {
@@ -162,10 +163,11 @@ function stopRunaway() {
     isRunawayActive = false;
     clearInterval(runawayTimer);
     clearTimeout(runawayTimeout);
+    mainBtn.classList.remove("runaway");
     mainBtn.style.left = "auto";
     mainBtn.style.top = "auto";
-    mainBtn.style.position = "static";
     mainBtn.style.transform = "translate(0,0)";
+    mainStage.style.minHeight = "";
 }
 
 function catchSucceeded() {

@@ -65,6 +65,11 @@ body {
     transform: scale(1.05);
 }
 
+#main-btn.runaway {
+    position: fixed;
+    z-index: 20;
+}
+
 /* --- PROGRESS BAR --- */
 #progress-container {
     width: 300px;
