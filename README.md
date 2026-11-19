@@ -6,6 +6,8 @@ Bir arkadaşım için hazırladığım, etkileşimli bir doğum günü sürprizi
 
 **🔗 Canlı demo:** https://yesilkirpi.github.io/dogum_gunu_sitesi_nevra/
 
+![Ana ekran](screenshots.png)
+
 ## Özellikler
 
 - **Hikâye motoru:** Tüm senaryo tek bir `story` dizisinde tutuluyor (mesaj, buton yazısı, stil, aksiyon). Yeni bir adım eklemek için diziye bir satır eklemek yeterli.
