@@ -261,7 +261,7 @@ function triggerBSOD() {
         bsodEl.classList.add("hidden");
 
         if (typeof confetti === "function") {
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, disableForReducedMotion: true });
         }
 
         clickCount = STEP.FINAL;
@@ -290,10 +290,10 @@ function startFinalStage() {
         if (lineIdx < lines.length) {
             const text = lines[lineIdx];
             let charIdx = 0;
-            typewriterEl.innerHTML = "";
+            typewriterEl.textContent = "";
 
             const typeInterval = setInterval(() => {
-                typewriterEl.innerHTML += text.charAt(charIdx);
+                typewriterEl.textContent += text.charAt(charIdx);
                 charIdx++;
 
                 if (charIdx >= text.length) {
@@ -307,7 +307,7 @@ function startFinalStage() {
             updateCarousel();
 
             if (typeof confetti === "function") {
-                confetti({ particleCount: 100, spread: 100, origin: { y: 0.4 } });
+                confetti({ particleCount: 100, spread: 100, origin: { y: 0.4 }, disableForReducedMotion: true });
             }
         }
     }
@@ -330,7 +330,7 @@ function updateCarousel() {
         videoCarouselPlayer.load(); // stop buffering the old video
         carouselImg.classList.remove("hidden");
         carouselImg.src = item.src;
-        carouselImg.alt = item.alt || `Memory photo ${currentMediaIndex + 1}`;
+        carouselImg.alt = item.alt || `Anı fotoğrafı ${currentMediaIndex + 1}`;
     } else {
         carouselImg.classList.add("hidden");
         videoCarouselPlayer.classList.remove("hidden");
@@ -400,7 +400,7 @@ window.addEventListener("keydown", (e) => {
     if (isKonami) {
         messageEl.innerText = "GİZLİ KOD BULUNDU! +1000 Güven Puanı!";
         if (typeof confetti === "function") {
-            confetti({ particleCount: 200, spread: 120 });
+            confetti({ particleCount: 200, spread: 120, disableForReducedMotion: true });
         }
         keyBuffer = [];
     }
