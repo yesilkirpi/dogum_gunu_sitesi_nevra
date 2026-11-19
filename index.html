@@ -11,12 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
 </head>
 
 <body>
     <main id="main-stage">
-        <h1 id="message"></h1>
+        <p id="message" role="status" aria-live="polite"></p>
         <button id="main-btn">DO NOT CLICK</button>
         <div id="progress-container" class="hidden">
             <div id="progress-label">Trust Level</div>
@@ -28,7 +28,7 @@
         </div>
     </main>
 
-    <img id="flash-img" src="" alt="Flash" class="hidden">
+    <img id="flash-img" alt="" class="hidden">
 
     <div id="bsod" class="hidden">
         <h1>:(</h1>
@@ -42,8 +42,8 @@
         <div id="carousel-container" class="hidden">
             <div class="carousel">
                 <button id="prev-btn" class="nav-btn">&lt;</button>
-                <img id="carousel-img" src="" alt="Anı">
-                <video id="video-carousel-player" class="hidden" controls playsinline></video>
+                <img id="carousel-img" alt="">
+                <video id="video-carousel-player" class="hidden" preload="metadata" playsinline></video>
                 <button id="next-btn" class="nav-btn">&gt;</button>
             </div>
             <p id="carousel-counter"></p>
