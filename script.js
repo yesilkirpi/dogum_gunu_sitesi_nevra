@@ -32,7 +32,7 @@ const MEDIA_ARRAY = [
     { type: "image", src: "photos/yedi.jpeg" },
     { type: "image", src: "photos/sekiz.jpeg" },
     { type: "image", src: "photos/onuc.jpeg" },
-    { type: "image", src: "photos/ondort.jpg" },
+    { type: "image", src: "photos/ondort.jpeg" },
     { type: "video", src: "videos/oniki.mp4" },
     { type: "video", src: "videos/dokuz.mp4" },
     { type: "video", src: "videos/onbir.mp4" }
