@@ -378,21 +378,26 @@ window.addEventListener("keydown", (e) => {
         return;
     }
 
-    keyBuffer.push(e.key);
+    // ignore held-down and modifier keys, make letters lowercase
+    const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    if (e.repeat || ["Shift", "Control", "Alt", "Meta", "CapsLock"].includes(key)) return;
 
-    if (keyBuffer.length > 10) {
+    keyBuffer.push(key);
+
+    if (keyBuffer.length > KONAMI_CODE.length) {
         keyBuffer.shift();
     }
 
-    const currentString = keyBuffer.join("").toLowerCase();
-
-    if (currentString.includes(FRIEND_NAME)) {
+    if (keyBuffer.join("").includes(FRIEND_NAME)) {
         messageEl.innerText = "İsmini yazmayı bırak da butona odaklan :)";
         keyBuffer = [];
+        return;
     }
 
-    const konamiString = KONAMI_CODE.join("");
-    if (keyBuffer.join("") === konamiString) {
+    const isKonami = keyBuffer.length === KONAMI_CODE.length &&
+        keyBuffer.every((k, i) => k === KONAMI_CODE[i]);
+
+    if (isKonami) {
         messageEl.innerText = "GİZLİ KOD BULUNDU! +1000 Güven Puanı!";
         if (typeof confetti === "function") {
             confetti({ particleCount: 200, spread: 120 });
