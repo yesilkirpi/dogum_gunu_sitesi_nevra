@@ -6,7 +6,7 @@ Bir arkadaşım için hazırladığım, etkileşimli bir doğum günü sürprizi
 
 **🔗 Canlı demo:** https://yesilkirpi.github.io/dogum_gunu_sitesi_nevra/
 
-![Ana ekran](screenshots.png)
+![Ana ekran](screenshot.png)
 
 ## Özellikler
 
