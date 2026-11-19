@@ -188,17 +188,25 @@ function catchFailed() {
 }
 
 // flash photo
+let flashTimeout = null;
+
 function showFlashPhoto() {
     const images = MEDIA_ARRAY.filter(item => item.type === "image");
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    flashImg.src = randomImage.src;
+    const pick = images[Math.floor(Math.random() * images.length)];
 
-    messageEl.classList.add("hidden");
-    flashImg.classList.remove("hidden");
-    setTimeout(() => {
-        flashImg.classList.add("hidden");
-        messageEl.classList.remove("hidden");
-    }, 500);
+    // load the photo first, so the 500ms flash is never blank
+    const loader = new Image();
+    loader.onload = () => {
+        clearTimeout(flashTimeout);
+        flashImg.src = pick.src;
+        messageEl.classList.add("hidden");
+        flashImg.classList.remove("hidden");
+        flashTimeout = setTimeout(() => {
+            flashImg.classList.add("hidden");
+            messageEl.classList.remove("hidden");
+        }, 500);
+    };
+    loader.src = pick.src;
 }
 
 // trust level bar
