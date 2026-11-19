@@ -69,11 +69,19 @@ const story = [
     { message: "Tebrikler! Tüm uyarıları görmezden geldin", btnText: "OPEN", action: "prepare_final" }
 ];
 
+// find steps by their action, so adding or moving a step doesn't break the logic
+const STEP = {
+    RUNAWAY: story.findIndex(s => s.action === "runaway"),
+    CAUGHT: story.findIndex(s => s.action === "stop_runaway"),
+    PROGRESS: story.findIndex(s => s.action === "start_progress"),
+    FINAL: story.findIndex(s => s.action === "prepare_final"),
+};
+
 // main click handler
 mainBtn.addEventListener("click", () => {
     const currentTime = Date.now();
 
-    if (currentTime - lastClickTime < 250 && clickCount < 10) {
+    if (currentTime - lastClickTime < 250 && clickCount < STEP.PROGRESS) {
         messageEl.innerText = "Sakin ol.";
         return;
     }
@@ -175,16 +183,17 @@ function stopRunaway() {
 
 function catchSucceeded() {
     stopRunaway();
-    messageEl.innerText = "Yakaladın! 🎉";
-    mainBtn.innerText = "Devam et";
-    clickCount = 7;
+    clickCount = STEP.CAUGHT;
+    const step = story[STEP.CAUGHT];
+    messageEl.innerText = "Yakaladın! 🎉\n\n" + step.message;
+    mainBtn.innerText = step.btnText;
 }
 
 function catchFailed() {
     stopRunaway();
-    messageEl.innerText = "Oops, kaçırdın. Tekrar dene?";
+    messageEl.innerText = "Upss, kaçırdın. Tekrar dene?";
     mainBtn.innerText = "Tekrar dene";
-    clickCount = 5;
+    clickCount = STEP.RUNAWAY - 1;
 }
 
 // flash photo
@@ -255,8 +264,8 @@ function triggerBSOD() {
             confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
         }
 
-        clickCount = 11;
-        const nextStep = story[clickCount];
+        clickCount = STEP.FINAL;
+        const nextStep = story[STEP.FINAL];
         messageEl.innerText = "Şaka.\n\n" + nextStep.message;
         mainBtn.innerText = nextStep.btnText;
         triggerAction(nextStep.action);
@@ -348,7 +357,7 @@ nextBtn.addEventListener("click", showNextMedia);
 function resetIdleTimer() {
     clearTimeout(idleTimer);
 
-    if (clickCount > 0 && clickCount < 10) {
+    if (clickCount > 0 && clickCount < STEP.PROGRESS) {
         idleTimer = setTimeout(() => {
             messageEl.innerText = "Uyudun mu?";
         }, 10000);
