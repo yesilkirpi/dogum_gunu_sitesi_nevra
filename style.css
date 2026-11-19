@@ -3,13 +3,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Pixelify Sans', cursive, sans-serif;
     -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    font: inherit;
 }
 
 body {
     background-color: #fbdce6;
     color: #a24f66;
+    font-family: 'Pixelify Sans', system-ui, sans-serif;
     min-height: 100vh;
     min-height: 100dvh;
     display: flex;
