@@ -100,6 +100,8 @@ body {
     overflow: hidden;
     margin: 0 auto;
     cursor: pointer;
+    display: block;
+    border: 0;
 }
 
 #progress-bar-fill {
@@ -108,6 +110,7 @@ body {
     background-color: #a24f66;
     border-radius: 999px;
     transition: width 0.3s ease;
+    display: block;
 }
 
 #progress-text,
