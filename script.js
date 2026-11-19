@@ -1,4 +1,4 @@
-// === DOM REFERANSLARI ===
+// DOM refs
 const mainBtn = document.getElementById("main-btn");
 const messageEl = document.getElementById("message");
 const progressContainer = document.getElementById("progress-container");
@@ -16,32 +16,34 @@ const carouselImg = document.getElementById("carousel-img");
 const videoCarouselPlayer = document.getElementById("video-carousel-player");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
+const carouselCounter = document.getElementById("carousel-counter");
+const carouselCaption = document.getElementById("carousel-caption");
 
-// === AYARLAR VE SABİTLER ===
+// config
 const FRIEND_NAME = "nevra";
 const KONAMI_CODE = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
 
-// tek array: fotolar ve videolar birlikte
+// photos and videos in one array
 const MEDIA_ARRAY = [
-    { type: "image", src: "photos/bir.jpeg" },
-    { type: "image", src: "photos/iki.jpeg" },
-    { type: "image", src: "photos/uc.jpeg" },
-    { type: "image", src: "photos/dort.jpeg" },
-    { type: "image", src: "photos/bes.jpeg" },
-    { type: "image", src: "photos/alti.jpeg" },
-    { type: "image", src: "photos/yedi.jpeg" },
-    { type: "image", src: "photos/sekiz.jpeg" },
-    { type: "image", src: "photos/onuc.jpeg" },
-    { type: "image", src: "photos/ondort.jpeg" },
-    { type: "video", src: "videos/oniki.mp4" },
-    { type: "video", src: "videos/dokuz.mp4" },
-    { type: "video", src: "videos/onbir.mp4" }
+    { type: "image", src: "photos/bir.jpeg", alt: "", caption: "döner uğruna ölme keyfi" },
+    { type: "image", src: "photos/iki.jpeg", alt: "", caption: "500 tl makarna?!?!" },
+    { type: "image", src: "photos/uc.jpeg", alt: "", caption: "" },
+    { type: "image", src: "photos/dort.jpeg", alt: "", caption: "malum kişiyle gün" },
+    { type: "image", src: "photos/bes.jpeg", alt: "", caption: "" },
+    { type: "image", src: "photos/alti.jpeg", alt: "", caption: "" },
+    { type: "image", src: "photos/yedi.jpeg", alt: "", caption: "" },
+    { type: "image", src: "photos/sekiz.jpeg", alt: "", caption: "" },
+    { type: "image", src: "photos/onuc.jpeg", alt: "", caption: "" },
+    { type: "image", src: "photos/ondort.jpeg", alt: "", caption: "" },
+    { type: "video", src: "videos/oniki.mp4", caption: "" },
+    { type: "video", src: "videos/dokuz.mp4", caption: "" },
+    { type: "video", src: "videos/onbir.mp4", caption: "" }
 ];
 
 const RUNAWAY_DURATION = 6000;
 const RUNAWAY_MOVE_INTERVAL = 700;
 
-// === STATE ===
+// state
 let clickCount = 0;
 let lastClickTime = 0;
 let keyBuffer = [];
@@ -51,7 +53,7 @@ let isRunawayActive = false;
 let runawayTimer = null;
 let runawayTimeout = null;
 
-// === SENARYO LİSTESİ ===
+// story steps
 const story = [
     { message: "", btnText: "DO NOT CLICK" },
     { message: "Tamam, daha büyük yazmam gerekiyormuş sanırım.", btnText: "SERIOUSLY, DON'T CLICK", style: { transform: "scale(1.3)" } },
@@ -60,14 +62,14 @@ const story = [
     { message: "Hainnn", btnText: "Hmm?", style: { backgroundColor: "#a24f66", color: "#fbdce6", borderColor: "#a24f66" } },
     { message: "Seni test ediyorum.", btnText: "Tıkla bakalım", style: { backgroundColor: "transparent", color: "#a24f66", borderColor: "#a24f66" } },
     { message: "Yakala da görelim nevroş", btnText: "Hadi!", action: "runaway" },
-    { message: "Tamam tamam, yeter", btnText: "Normale dön.", action: "stop_runaway" },
+    { message: "Tamam tamam, pes.", btnText: "Normale dön.", action: "stop_runaway" },
     { message: "Bu arada...", btnText: "Ne oldu?", action: "flash_photo" },
     { message: "Hayır görmedin.", btnText: "Emin misin?", action: "flash_photo" },
     { message: "meow", btnText: "", action: "start_progress", style: { display: "none" } },
     { message: "Tebrikler! Tüm uyarıları görmezden geldin", btnText: "OPEN", action: "prepare_final" }
 ];
 
-// === ANA TIKLAMA YÖNLENDİRİCİSİ ===
+// main click handler
 mainBtn.addEventListener("click", () => {
     const currentTime = Date.now();
 
@@ -103,7 +105,7 @@ mainBtn.addEventListener("click", () => {
     }
 });
 
-// === AKSİYON MOTORU (ROUTER) ===
+// actions
 function triggerAction(actionName) {
     switch (actionName) {
         case "runaway":
@@ -127,9 +129,10 @@ function triggerAction(actionName) {
     }
 }
 
-// --- Kaçan Buton ---
+// runaway button
 function startRunaway() {
     isRunawayActive = true;
+    // keep the stage height so the message doesn't jump when the button leaves the flow
     mainStage.style.minHeight = mainStage.offsetHeight + "px";
     mainBtn.classList.add("runaway");
     moveButtonRandomly();
@@ -184,7 +187,7 @@ function catchFailed() {
     clickCount = 5;
 }
 
-// --- Flaş Fotoğraf (mesaj gizlenir) ---
+// flash photo
 function showFlashPhoto() {
     const images = MEDIA_ARRAY.filter(item => item.type === "image");
     const randomImage = images[Math.floor(Math.random() * images.length)];
@@ -198,7 +201,7 @@ function showFlashPhoto() {
     }, 500);
 }
 
-// --- Trust Level Bar ---
+// trust level bar
 function startProgressBar() {
     progressContainer.classList.remove("hidden");
     progressBarBg.style.cursor = "pointer";
@@ -252,7 +255,7 @@ function triggerBSOD() {
     }, 2500);
 }
 
-// === FİNAL SAHNESİ (DAKTİLO & CAROUSEL) ===
+// final stage (typewriter + gallery)
 function startFinalStage() {
     mainStage.classList.add("hidden");
     finalStage.classList.remove("hidden");
@@ -295,39 +298,45 @@ function startFinalStage() {
     playTypewriter();
 }
 
-// --- Media Carousel (foto + video birleşik, ses açık) ---
+// gallery
 function updateCarousel() {
     if (MEDIA_ARRAY.length === 0) return;
     const item = MEDIA_ARRAY[currentMediaIndex];
 
     videoCarouselPlayer.pause();
+    carouselCounter.textContent = `${currentMediaIndex + 1} / ${MEDIA_ARRAY.length}`;
+    carouselCaption.textContent = item.caption || "";
 
     if (item.type === "image") {
         videoCarouselPlayer.classList.add("hidden");
         videoCarouselPlayer.removeAttribute("src");
+        videoCarouselPlayer.load(); // stop buffering the old video
         carouselImg.classList.remove("hidden");
         carouselImg.src = item.src;
+        carouselImg.alt = item.alt || `Memory photo ${currentMediaIndex + 1}`;
     } else {
         carouselImg.classList.add("hidden");
         videoCarouselPlayer.classList.remove("hidden");
         videoCarouselPlayer.src = item.src;
         videoCarouselPlayer.load();
-        // Ses açık olduğu için tarayıcılar otomatik oynatmayı engelleyebilir.
-        // Kullanıcı play tuşuna basarak sesli izleyebilir.
+        // browsers can block autoplay with sound, the user just hits play
     }
 }
 
-prevBtn.addEventListener("click", () => {
+function showPrevMedia() {
     currentMediaIndex = (currentMediaIndex - 1 + MEDIA_ARRAY.length) % MEDIA_ARRAY.length;
     updateCarousel();
-});
+}
 
-nextBtn.addEventListener("click", () => {
+function showNextMedia() {
     currentMediaIndex = (currentMediaIndex + 1) % MEDIA_ARRAY.length;
     updateCarousel();
-});
+}
 
-// === EASTER EGGS ===
+prevBtn.addEventListener("click", showPrevMedia);
+nextBtn.addEventListener("click", showNextMedia);
+
+// easter eggs
 function resetIdleTimer() {
     clearTimeout(idleTimer);
 
@@ -344,6 +353,14 @@ window.addEventListener("touchstart", resetIdleTimer);
 
 window.addEventListener("keydown", (e) => {
     resetIdleTimer();
+
+    // arrow keys flip through the gallery
+    if (!carouselContainer.classList.contains("hidden")) {
+        if (e.key === "ArrowLeft") showPrevMedia();
+        if (e.key === "ArrowRight") showNextMedia();
+        return;
+    }
+
     keyBuffer.push(e.key);
 
     if (keyBuffer.length > 10) {

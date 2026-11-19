@@ -229,6 +229,16 @@ body {
     flex-shrink: 0;
 }
 
+#carousel-counter {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+}
+
+#carousel-caption {
+    margin-top: 0.25rem;
+    min-height: 1.5em;
+}
+
 #final-note {
     margin-top: 0.5rem;
     font-size: clamp(0.85rem, 3vw, 1rem);
