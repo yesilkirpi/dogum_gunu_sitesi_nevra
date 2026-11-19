@@ -4,7 +4,7 @@ Bir arkadaşım için hazırladığım, etkileşimli bir doğum günü sürprizi
 
 *An interactive birthday surprise built with vanilla HTML, CSS and JavaScript: a story-driven "do not click" button, a runaway button, a fake loading bar and BSOD, a typewriter effect and a photo/video gallery.*
 
-**🔗 Canlı demo:** https://yesilkirpi.github.io/nevros_icin/
+**🔗 Canlı demo:** https://yesilkirpi.github.io/dogum_gunu_sitesi_nevra/
 
 ## Özellikler
 
